@@ -1,5 +1,42 @@
 import SwiftUI
+
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
+extension Color {
+    static var appBackground: Color {
+        #if canImport(UIKit)
+        return Color(uiColor: .systemGroupedBackground)
+        #elseif canImport(AppKit)
+        return Color(nsColor: .windowBackgroundColor)
+        #else
+        return Color.gray.opacity(0.1)
+        #endif
+    }
+
+    static var cardSurface: Color {
+        #if canImport(UIKit)
+        return Color(uiColor: .systemBackground)
+        #elseif canImport(AppKit)
+        return Color(nsColor: .controlBackgroundColor)
+        #else
+        return Color.white
+        #endif
+    }
+
+    static var kanjiTileSurface: Color {
+        #if canImport(UIKit)
+        return Color(uiColor: .systemGray6)
+        #elseif canImport(AppKit)
+        return Color(nsColor: .underPageBackgroundColor)
+        #else
+        return Color.gray.opacity(0.1)
+        #endif
+    }
+}
 
 struct Word {
     let jlpt: String
@@ -53,8 +90,10 @@ struct ContentView: View {
             .padding(.top, 8)
             .padding(.bottom, 40)
         }
-        .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
+        .background(Color.appBackground.ignoresSafeArea())
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 
@@ -125,7 +164,7 @@ struct KanjiInfoCard: View {
                     .frame(width: 96, height: 96)
                     .background(
                         RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .fill(Color(uiColor: .systemGray6))
+                            .fill(Color.kanjiTileSurface)
                     )
 
                 VStack(alignment: .leading, spacing: 10) {
@@ -143,7 +182,7 @@ struct KanjiInfoCard: View {
 
     private var cardBackground: some View {
         RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color(uiColor: .systemBackground))
+            .fill(Color.cardSurface)
             .shadow(color: Color.black.opacity(0.05), radius: 14, x: 0, y: 6)
     }
 }
@@ -192,7 +231,7 @@ struct ExampleSentenceCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(Color(uiColor: .systemBackground))
+                .fill(Color.cardSurface)
                 .shadow(color: Color.black.opacity(0.05), radius: 14, x: 0, y: 6)
         )
     }
