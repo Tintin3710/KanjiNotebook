@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct Word {
     let jlpt: String
@@ -52,7 +53,7 @@ struct ContentView: View {
             .padding(.top, 8)
             .padding(.bottom, 40)
         }
-        .background(Color(.systemGroupedBackground).ignoresSafeArea())
+        .background(Color(uiColor: .systemGroupedBackground).ignoresSafeArea())
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -124,7 +125,7 @@ struct KanjiInfoCard: View {
                     .frame(width: 96, height: 96)
                     .background(
                         RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .fill(Color(.systemGray6))
+                            .fill(Color(uiColor: .systemGray6))
                     )
 
                 VStack(alignment: .leading, spacing: 10) {
@@ -142,7 +143,7 @@ struct KanjiInfoCard: View {
 
     private var cardBackground: some View {
         RoundedRectangle(cornerRadius: 22, style: .continuous)
-            .fill(Color(.systemBackground))
+            .fill(Color(uiColor: .systemBackground))
             .shadow(color: Color.black.opacity(0.05), radius: 14, x: 0, y: 6)
     }
 }
@@ -191,7 +192,7 @@ struct ExampleSentenceCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(Color(.systemBackground))
+                .fill(Color(uiColor: .systemBackground))
                 .shadow(color: Color.black.opacity(0.05), radius: 14, x: 0, y: 6)
         )
     }
